@@ -53,6 +53,10 @@
 */
 
 static void (*ADC1_CommonDefaultInterruptHandler)(void);
+static void (*ADC1_channel_AN0DefaultInterruptHandler)(uint16_t adcVal);
+static void (*ADC1_channel_AN1DefaultInterruptHandler)(uint16_t adcVal);
+static void (*ADC1_channel_AN3DefaultInterruptHandler)(uint16_t adcVal);
+static void (*ADC1_channel_AN4DefaultInterruptHandler)(uint16_t adcVal);
 static void (*ADC1_channel_AN16DefaultInterruptHandler)(uint16_t adcVal);
 static void (*ADC1_channel_AN17DefaultInterruptHandler)(uint16_t adcVal);
 static void (*ADC1_channel_AN18DefaultInterruptHandler)(uint16_t adcVal);
@@ -148,6 +152,10 @@ void ADC1_Initialize (void)
 	
     //Assign Default Callbacks
     ADC1_SetCommonInterruptHandler(&ADC1_CallBack);
+    ADC1_Setchannel_AN0InterruptHandler(&ADC1_channel_AN0_CallBack);
+    ADC1_Setchannel_AN1InterruptHandler(&ADC1_channel_AN1_CallBack);
+    ADC1_Setchannel_AN3InterruptHandler(&ADC1_channel_AN3_CallBack);
+    ADC1_Setchannel_AN4InterruptHandler(&ADC1_channel_AN4_CallBack);
     ADC1_Setchannel_AN16InterruptHandler(&ADC1_channel_AN16_CallBack);
     ADC1_Setchannel_AN17InterruptHandler(&ADC1_channel_AN17_CallBack);
     ADC1_Setchannel_AN18InterruptHandler(&ADC1_channel_AN18_CallBack);
@@ -235,6 +243,110 @@ void __attribute__ ((weak)) ADC1_Tasks ( void )
 
         // clear the ADC1 interrupt flag
         IFS5bits.ADCIF = 0;
+    }
+}
+
+void __attribute__ ((weak)) ADC1_channel_AN0_CallBack( uint16_t adcVal )
+{ 
+
+}
+
+void ADC1_Setchannel_AN0InterruptHandler(void* handler)
+{
+    ADC1_channel_AN0DefaultInterruptHandler = handler;
+}
+
+void __attribute__ ((weak)) ADC1_channel_AN0_Tasks ( void )
+{
+    uint16_t valchannel_AN0;
+
+    if(ADSTATLbits.AN0RDY)
+    {
+        //Read the ADC value from the ADCBUF
+        valchannel_AN0 = ADCBUF0;
+
+        if(ADC1_channel_AN0DefaultInterruptHandler) 
+        { 
+            ADC1_channel_AN0DefaultInterruptHandler(valchannel_AN0); 
+        }
+    }
+}
+
+void __attribute__ ((weak)) ADC1_channel_AN1_CallBack( uint16_t adcVal )
+{ 
+
+}
+
+void ADC1_Setchannel_AN1InterruptHandler(void* handler)
+{
+    ADC1_channel_AN1DefaultInterruptHandler = handler;
+}
+
+void __attribute__ ((weak)) ADC1_channel_AN1_Tasks ( void )
+{
+    uint16_t valchannel_AN1;
+
+    if(ADSTATLbits.AN1RDY)
+    {
+        //Read the ADC value from the ADCBUF
+        valchannel_AN1 = ADCBUF1;
+
+        if(ADC1_channel_AN1DefaultInterruptHandler) 
+        { 
+            ADC1_channel_AN1DefaultInterruptHandler(valchannel_AN1); 
+        }
+    }
+}
+
+void __attribute__ ((weak)) ADC1_channel_AN3_CallBack( uint16_t adcVal )
+{ 
+
+}
+
+void ADC1_Setchannel_AN3InterruptHandler(void* handler)
+{
+    ADC1_channel_AN3DefaultInterruptHandler = handler;
+}
+
+void __attribute__ ((weak)) ADC1_channel_AN3_Tasks ( void )
+{
+    uint16_t valchannel_AN3;
+
+    if(ADSTATLbits.AN3RDY)
+    {
+        //Read the ADC value from the ADCBUF
+        valchannel_AN3 = ADCBUF3;
+
+        if(ADC1_channel_AN3DefaultInterruptHandler) 
+        { 
+            ADC1_channel_AN3DefaultInterruptHandler(valchannel_AN3); 
+        }
+    }
+}
+
+void __attribute__ ((weak)) ADC1_channel_AN4_CallBack( uint16_t adcVal )
+{ 
+
+}
+
+void ADC1_Setchannel_AN4InterruptHandler(void* handler)
+{
+    ADC1_channel_AN4DefaultInterruptHandler = handler;
+}
+
+void __attribute__ ((weak)) ADC1_channel_AN4_Tasks ( void )
+{
+    uint16_t valchannel_AN4;
+
+    if(ADSTATLbits.AN4RDY)
+    {
+        //Read the ADC value from the ADCBUF
+        valchannel_AN4 = ADCBUF4;
+
+        if(ADC1_channel_AN4DefaultInterruptHandler) 
+        { 
+            ADC1_channel_AN4DefaultInterruptHandler(valchannel_AN4); 
+        }
     }
 }
 

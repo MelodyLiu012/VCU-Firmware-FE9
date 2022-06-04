@@ -90,6 +90,10 @@
  */
 typedef enum 
 {
+    channel_AN0,//Channel Name:AN0   Assigned to:Shared Channel
+    channel_AN1,//Channel Name:AN1   Assigned to:Shared Channel
+    channel_AN3,//Channel Name:AN3   Assigned to:Shared Channel
+    channel_AN4,//Channel Name:AN4   Assigned to:Shared Channel
     channel_AN16,//Channel Name:AN16   Assigned to:Shared Channel
     channel_AN17,//Channel Name:AN17   Assigned to:Shared Channel
     channel_AN18,//Channel Name:AN18   Assigned to:Shared Channel
@@ -385,6 +389,18 @@ inline static uint16_t ADC1_ConversionResultGet( ADC1_CHANNEL channel )
 
     switch(channel)
     {
+        case channel_AN0:
+                result = ADCBUF0;
+                break;
+        case channel_AN1:
+                result = ADCBUF1;
+                break;
+        case channel_AN3:
+                result = ADCBUF3;
+                break;
+        case channel_AN4:
+                result = ADCBUF4;
+                break;
         case channel_AN16:
                 result = ADCBUF16;
                 break;
@@ -449,6 +465,18 @@ inline static bool ADC1_IsConversionComplete(ADC1_CHANNEL channel)
 
     switch(channel)
     {
+        case channel_AN0:
+                status = ADSTATLbits.AN0RDY;
+                break;
+        case channel_AN1:
+                status = ADSTATLbits.AN1RDY;
+                break;
+        case channel_AN3:
+                status = ADSTATLbits.AN3RDY;
+                break;
+        case channel_AN4:
+                status = ADSTATLbits.AN4RDY;
+                break;
         case channel_AN16:
                 status = ADSTATHbits.AN16RDY;
                 break;
@@ -674,6 +702,18 @@ inline static void ADC1_IndividualChannelInterruptEnable(ADC1_CHANNEL channel)
 {
     switch(channel)
     {
+        case channel_AN0:
+                IEC5bits.ADCAN0IE = 1;
+                break;
+        case channel_AN1:
+                IEC5bits.ADCAN1IE = 1;
+                break;
+        case channel_AN3:
+                IEC5bits.ADCAN3IE = 1;
+                break;
+        case channel_AN4:
+                IEC5bits.ADCAN4IE = 1;
+                break;
         case channel_AN16:
                 IEC6bits.ADCAN16IE = 1;
                 break;
@@ -720,6 +760,18 @@ inline static void ADC1_IndividualChannelInterruptDisable(ADC1_CHANNEL channel)
 {
     switch(channel)
     {
+        case channel_AN0:
+                IEC5bits.ADCAN0IE = 0;
+                break;
+        case channel_AN1:
+                IEC5bits.ADCAN1IE = 0;
+                break;
+        case channel_AN3:
+                IEC5bits.ADCAN3IE = 0;
+                break;
+        case channel_AN4:
+                IEC5bits.ADCAN4IE = 0;
+                break;
         case channel_AN16:
                 IEC6bits.ADCAN16IE = 0;
                 break;
@@ -765,6 +817,18 @@ inline static void ADC1_IndividualChannelInterruptFlagClear(ADC1_CHANNEL channel
 {
     switch(channel)
     {
+        case channel_AN0:
+                IFS5bits.ADCAN0IF = 0;
+                break;
+        case channel_AN1:
+                IFS5bits.ADCAN1IF = 0;
+                break;
+        case channel_AN3:
+                IFS5bits.ADCAN3IF = 0;
+                break;
+        case channel_AN4:
+                IFS5bits.ADCAN4IF = 0;
+                break;
         case channel_AN16:
                 IFS6bits.ADCAN16IF = 0;
                 break;
@@ -784,6 +848,286 @@ inline static void ADC1_IndividualChannelInterruptFlagClear(ADC1_CHANNEL channel
                 break;
     }
 }
+
+/**
+  @Summary
+    ADC1 channel_AN0 callback routine.
+
+  @Description
+    This routine is a ADC1 channel_AN0 callback function.
+  
+  @Preconditions
+    None.
+
+  @Param
+    None.
+
+  @Returns
+    None
+ 
+  @Example 
+    <code>
+        ADC1_Setchannel_AN0InterruptHandler(&ADC1_channel_AN0_CallBack);
+    </code>
+*/
+void ADC1_channel_AN0_CallBack(uint16_t adcVal);
+
+/**
+  @Summary
+    Assigns a function pointer with a ADC1 channel_AN0 callback address.
+
+  @Description
+    This routine assigns a function pointer with a ADC1 channel_AN0 callback address.
+  
+  @Preconditions
+    None.
+
+  @Param
+    Address of the callback routine.
+
+  @Returns
+    None
+ 
+  @Example 
+    <code>
+        ADC1_Setchannel_AN0InterruptHandler(&ADC1_channel_AN0_CallBack);
+    </code>
+*/
+void ADC1_Setchannel_AN0InterruptHandler(void* handler);
+
+/**
+  @Summary
+    Polled implementation
+
+  @Description
+    This routine is used to implement the tasks for ADC1 channel_AN0 polled implementations.
+  
+  @Preconditions
+    ADC1_Initialize() function should have been 
+    called before calling this function.
+ 
+  @Param
+    None
+
+  @Returns 
+    None
+ 
+  @Example
+    <code>    
+        ADC1_channel_AN0_Tasks();
+    </code>
+*/
+void ADC1_channel_AN0_Tasks(void);
+
+/**
+  @Summary
+    ADC1 channel_AN1 callback routine.
+
+  @Description
+    This routine is a ADC1 channel_AN1 callback function.
+  
+  @Preconditions
+    None.
+
+  @Param
+    None.
+
+  @Returns
+    None
+ 
+  @Example 
+    <code>
+        ADC1_Setchannel_AN1InterruptHandler(&ADC1_channel_AN1_CallBack);
+    </code>
+*/
+void ADC1_channel_AN1_CallBack(uint16_t adcVal);
+
+/**
+  @Summary
+    Assigns a function pointer with a ADC1 channel_AN1 callback address.
+
+  @Description
+    This routine assigns a function pointer with a ADC1 channel_AN1 callback address.
+  
+  @Preconditions
+    None.
+
+  @Param
+    Address of the callback routine.
+
+  @Returns
+    None
+ 
+  @Example 
+    <code>
+        ADC1_Setchannel_AN1InterruptHandler(&ADC1_channel_AN1_CallBack);
+    </code>
+*/
+void ADC1_Setchannel_AN1InterruptHandler(void* handler);
+
+/**
+  @Summary
+    Polled implementation
+
+  @Description
+    This routine is used to implement the tasks for ADC1 channel_AN1 polled implementations.
+  
+  @Preconditions
+    ADC1_Initialize() function should have been 
+    called before calling this function.
+ 
+  @Param
+    None
+
+  @Returns 
+    None
+ 
+  @Example
+    <code>    
+        ADC1_channel_AN1_Tasks();
+    </code>
+*/
+void ADC1_channel_AN1_Tasks(void);
+
+/**
+  @Summary
+    ADC1 channel_AN3 callback routine.
+
+  @Description
+    This routine is a ADC1 channel_AN3 callback function.
+  
+  @Preconditions
+    None.
+
+  @Param
+    None.
+
+  @Returns
+    None
+ 
+  @Example 
+    <code>
+        ADC1_Setchannel_AN3InterruptHandler(&ADC1_channel_AN3_CallBack);
+    </code>
+*/
+void ADC1_channel_AN3_CallBack(uint16_t adcVal);
+
+/**
+  @Summary
+    Assigns a function pointer with a ADC1 channel_AN3 callback address.
+
+  @Description
+    This routine assigns a function pointer with a ADC1 channel_AN3 callback address.
+  
+  @Preconditions
+    None.
+
+  @Param
+    Address of the callback routine.
+
+  @Returns
+    None
+ 
+  @Example 
+    <code>
+        ADC1_Setchannel_AN3InterruptHandler(&ADC1_channel_AN3_CallBack);
+    </code>
+*/
+void ADC1_Setchannel_AN3InterruptHandler(void* handler);
+
+/**
+  @Summary
+    Polled implementation
+
+  @Description
+    This routine is used to implement the tasks for ADC1 channel_AN3 polled implementations.
+  
+  @Preconditions
+    ADC1_Initialize() function should have been 
+    called before calling this function.
+ 
+  @Param
+    None
+
+  @Returns 
+    None
+ 
+  @Example
+    <code>    
+        ADC1_channel_AN3_Tasks();
+    </code>
+*/
+void ADC1_channel_AN3_Tasks(void);
+
+/**
+  @Summary
+    ADC1 channel_AN4 callback routine.
+
+  @Description
+    This routine is a ADC1 channel_AN4 callback function.
+  
+  @Preconditions
+    None.
+
+  @Param
+    None.
+
+  @Returns
+    None
+ 
+  @Example 
+    <code>
+        ADC1_Setchannel_AN4InterruptHandler(&ADC1_channel_AN4_CallBack);
+    </code>
+*/
+void ADC1_channel_AN4_CallBack(uint16_t adcVal);
+
+/**
+  @Summary
+    Assigns a function pointer with a ADC1 channel_AN4 callback address.
+
+  @Description
+    This routine assigns a function pointer with a ADC1 channel_AN4 callback address.
+  
+  @Preconditions
+    None.
+
+  @Param
+    Address of the callback routine.
+
+  @Returns
+    None
+ 
+  @Example 
+    <code>
+        ADC1_Setchannel_AN4InterruptHandler(&ADC1_channel_AN4_CallBack);
+    </code>
+*/
+void ADC1_Setchannel_AN4InterruptHandler(void* handler);
+
+/**
+  @Summary
+    Polled implementation
+
+  @Description
+    This routine is used to implement the tasks for ADC1 channel_AN4 polled implementations.
+  
+  @Preconditions
+    ADC1_Initialize() function should have been 
+    called before calling this function.
+ 
+  @Param
+    None
+
+  @Returns 
+    None
+ 
+  @Example
+    <code>    
+        ADC1_channel_AN4_Tasks();
+    </code>
+*/
+void ADC1_channel_AN4_Tasks(void);
 
 /**
   @Summary
@@ -1182,6 +1526,226 @@ inline static void __attribute__((deprecated("\nThis will be removed in future M
 inline static void __attribute__((deprecated("\nThis will be removed in future MCC releases."))) ADC1_SharedCoreConversionClockPrescalerSet(uint8_t prescaler)
 {
     ADCON2Lbits.SHRADCS = prescaler;
+}
+/**
+  @Summary
+    Returns the ADC1 conversion value for the shared core channel AN0
+
+  @Description
+    This routine is used to get the analog to digital converted value for channel AN0. This
+    routine gets converted values from the shared core channel AN0.
+ 
+  @Preconditions
+    The shared core must be enabled and calibrated before calling this routine 
+    using ADC1_SharedCorePowerEnable() and ADC1_SharedCoreCalibration() 
+    respectively. This routine returns the conversion value only after the 
+    conversion is complete. Completion status conversion can be checked using 
+    ADC1_IsSharedChannelAN0ConversionComplete() routine.
+   
+  @Returns
+    Returns the buffer containing the conversion value.
+
+  @Param
+    Buffer address
+  
+  @Example
+    Refer to ADC1_Initialize(); for an example
+ */
+inline static uint16_t __attribute__((deprecated("\nThis will be removed in future MCC releases."))) ADC1_SharedChannelAN0ConversionResultGet(void) 
+{
+    return ADCBUF0;
+}
+/**
+  @Summary
+    Returns the conversion status of shared channel AN0 selected for conversion
+
+  @Description
+    This routine is used to return the conversion status of the shared channel AN0 
+    selected for conversion.
+  
+  @Preconditions
+    ADC1_Initialize() function should have been 
+    called before calling this function.
+ 
+  @Returns
+    The value of the Channel AN0 Conversion register
+
+  @Param
+    None
+  
+  @Example
+    Refer to ADC1_Initialize(); for an example
+ 
+*/
+
+inline static bool __attribute__((deprecated("\nThis will be removed in future MCC releases."))) ADC1_IsSharedChannelAN0ConversionComplete(void)
+{   
+    return ADSTATLbits.AN0RDY;
+}
+/**
+  @Summary
+    Returns the ADC1 conversion value for the shared core channel AN1
+
+  @Description
+    This routine is used to get the analog to digital converted value for channel AN1. This
+    routine gets converted values from the shared core channel AN1.
+ 
+  @Preconditions
+    The shared core must be enabled and calibrated before calling this routine 
+    using ADC1_SharedCorePowerEnable() and ADC1_SharedCoreCalibration() 
+    respectively. This routine returns the conversion value only after the 
+    conversion is complete. Completion status conversion can be checked using 
+    ADC1_IsSharedChannelAN1ConversionComplete() routine.
+   
+  @Returns
+    Returns the buffer containing the conversion value.
+
+  @Param
+    Buffer address
+  
+  @Example
+    Refer to ADC1_Initialize(); for an example
+ */
+inline static uint16_t __attribute__((deprecated("\nThis will be removed in future MCC releases."))) ADC1_SharedChannelAN1ConversionResultGet(void) 
+{
+    return ADCBUF1;
+}
+/**
+  @Summary
+    Returns the conversion status of shared channel AN1 selected for conversion
+
+  @Description
+    This routine is used to return the conversion status of the shared channel AN1 
+    selected for conversion.
+  
+  @Preconditions
+    ADC1_Initialize() function should have been 
+    called before calling this function.
+ 
+  @Returns
+    The value of the Channel AN1 Conversion register
+
+  @Param
+    None
+  
+  @Example
+    Refer to ADC1_Initialize(); for an example
+ 
+*/
+
+inline static bool __attribute__((deprecated("\nThis will be removed in future MCC releases."))) ADC1_IsSharedChannelAN1ConversionComplete(void)
+{   
+    return ADSTATLbits.AN1RDY;
+}
+/**
+  @Summary
+    Returns the ADC1 conversion value for the shared core channel AN3
+
+  @Description
+    This routine is used to get the analog to digital converted value for channel AN3. This
+    routine gets converted values from the shared core channel AN3.
+ 
+  @Preconditions
+    The shared core must be enabled and calibrated before calling this routine 
+    using ADC1_SharedCorePowerEnable() and ADC1_SharedCoreCalibration() 
+    respectively. This routine returns the conversion value only after the 
+    conversion is complete. Completion status conversion can be checked using 
+    ADC1_IsSharedChannelAN3ConversionComplete() routine.
+   
+  @Returns
+    Returns the buffer containing the conversion value.
+
+  @Param
+    Buffer address
+  
+  @Example
+    Refer to ADC1_Initialize(); for an example
+ */
+inline static uint16_t __attribute__((deprecated("\nThis will be removed in future MCC releases."))) ADC1_SharedChannelAN3ConversionResultGet(void) 
+{
+    return ADCBUF3;
+}
+/**
+  @Summary
+    Returns the conversion status of shared channel AN3 selected for conversion
+
+  @Description
+    This routine is used to return the conversion status of the shared channel AN3 
+    selected for conversion.
+  
+  @Preconditions
+    ADC1_Initialize() function should have been 
+    called before calling this function.
+ 
+  @Returns
+    The value of the Channel AN3 Conversion register
+
+  @Param
+    None
+  
+  @Example
+    Refer to ADC1_Initialize(); for an example
+ 
+*/
+
+inline static bool __attribute__((deprecated("\nThis will be removed in future MCC releases."))) ADC1_IsSharedChannelAN3ConversionComplete(void)
+{   
+    return ADSTATLbits.AN3RDY;
+}
+/**
+  @Summary
+    Returns the ADC1 conversion value for the shared core channel AN4
+
+  @Description
+    This routine is used to get the analog to digital converted value for channel AN4. This
+    routine gets converted values from the shared core channel AN4.
+ 
+  @Preconditions
+    The shared core must be enabled and calibrated before calling this routine 
+    using ADC1_SharedCorePowerEnable() and ADC1_SharedCoreCalibration() 
+    respectively. This routine returns the conversion value only after the 
+    conversion is complete. Completion status conversion can be checked using 
+    ADC1_IsSharedChannelAN4ConversionComplete() routine.
+   
+  @Returns
+    Returns the buffer containing the conversion value.
+
+  @Param
+    Buffer address
+  
+  @Example
+    Refer to ADC1_Initialize(); for an example
+ */
+inline static uint16_t __attribute__((deprecated("\nThis will be removed in future MCC releases."))) ADC1_SharedChannelAN4ConversionResultGet(void) 
+{
+    return ADCBUF4;
+}
+/**
+  @Summary
+    Returns the conversion status of shared channel AN4 selected for conversion
+
+  @Description
+    This routine is used to return the conversion status of the shared channel AN4 
+    selected for conversion.
+  
+  @Preconditions
+    ADC1_Initialize() function should have been 
+    called before calling this function.
+ 
+  @Returns
+    The value of the Channel AN4 Conversion register
+
+  @Param
+    None
+  
+  @Example
+    Refer to ADC1_Initialize(); for an example
+ 
+*/
+
+inline static bool __attribute__((deprecated("\nThis will be removed in future MCC releases."))) ADC1_IsSharedChannelAN4ConversionComplete(void)
+{   
+    return ADSTATLbits.AN4RDY;
 }
 
 #ifdef __cplusplus  // Provide C++ Compatibility

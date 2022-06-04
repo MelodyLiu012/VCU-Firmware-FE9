@@ -168,7 +168,7 @@ void report_fault(error_t _error) {
 }
 
 // How long to wait for pre-charging to finish before timing out
-#define MAX_CONSERVATION_SECS 4
+#define MAX_CONSERVATION_SECS 5
 // Keeps track of timer waiting for pre-charging
 unsigned int conservative_timer_ms = 0;
 // Delay between checking pre-charging state
